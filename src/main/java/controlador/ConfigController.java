@@ -6,6 +6,8 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import vista.configuracion_view;
+import modelo.Memory;
+
 
 /**
  *
@@ -13,13 +15,18 @@ import vista.configuracion_view;
  */
 public class ConfigController implements ActionListener{
   public configuracion_view vista;
+  private MainController mainController;
+  private Memory memoria;
   
-  public ConfigController(configuracion_view vista) {
+  public ConfigController(configuracion_view vista, MainController mainController) {
     this.vista = vista;
     this.vista.atras.addActionListener(this);
     this.vista.listo.addActionListener(this);
     this.vista.cantidadMemoria.addActionListener(this);
+    this.mainController = mainController;  
+    this.memoria = new Memory(100);
   }
+  
  
   @Override
   public void actionPerformed(ActionEvent e) {
@@ -40,6 +47,13 @@ public class ConfigController implements ActionListener{
                 int cantidadMemoria = Integer.parseInt(textoMemoria);
                 if (cantidadMemoria > -1 && cantidadMemoria <100) {
                   System.out.println("Iniciando app con " + cantidadMemoria + " unidades de memoria...");  // Inicia
+                  int numeroRandomMemoUser = memoria.generarMemoriaUsuario(cantidadMemoria);
+                  mainController.colocaCargasMemoria(textoMemoria,  String.valueOf(numeroRandomMemoUser));
+                  //mainController.colocaCargasMemoria(textoMemoria, numeroRandomMemoUser); 
+                  
+                  mainController.vista.setVisible(true);  // Volver a la vista principal
+                  vista.setVisible(false);  // Cerrar la vista de configuración
+                  break;
                 } 
                 else {
                   javax.swing.JOptionPane.showMessageDialog(this.vista, "Error: La cantidad de memoria debe ser mayor que 0 y menor a 99.");

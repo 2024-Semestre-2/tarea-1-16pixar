@@ -1,6 +1,7 @@
 controlador\ExecutionController.class
 vista\main_view.class
 vista\execution_view.class
+modelo\Instruction.class
 vista\configuracion_view$1.class
 vista\execution_view$1.class
 vista\main_view$1.class
@@ -8,7 +9,6 @@ controlador\GestorConfig.class
 modelo\CPU.class
 vista\configuracion_view.class
 modelo\Register.class
-modelo\Instruccions.class
 vista\main_view$2.class
 controlador\GestorMainController.class
 controlador\MainController.class

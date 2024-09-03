@@ -4,20 +4,29 @@
  */
 package controlador;
 import vista.configuracion_view;
+import vista.main_view;
 
 /**
  * Clase encargada de gestionar acceso a otros frames
  * @author Aarón Piñar Mora
  */
 public class GestorConfig {
-  public static void main(String[] args) {
-    configuracion_view vista = new configuracion_view();
-    ConfigController Inicio = new ConfigController(vista);             
-    Inicio.vista.setVisible(true);
-    Inicio.vista.setLocationRelativeTo(null);
-  } 
-  void llamada() {
-    main(null);
+  private MainController mainController;
+
+  public GestorConfig(MainController mainController) {
+    this.mainController = mainController;
+  }
+
+  public void llamada() {
+        configuracion_view vista = new configuracion_view();
+        ConfigController configController = new ConfigController(vista, mainController); 
+        configController.vista.setVisible(true);
+        configController.vista.setLocationRelativeTo(null);
+    }
+ 
+  public void cerrar() {
+    // Volver a la ventana principal
+    mainController.vista.setVisible(true);
   }
     
 }

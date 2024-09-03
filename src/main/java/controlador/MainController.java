@@ -18,6 +18,7 @@ import vista.main_view;
  */
 public class MainController implements ActionListener{
   public main_view vista;  
+
   
   public MainController(main_view vista) {
     this.vista = vista;
@@ -26,6 +27,16 @@ public class MainController implements ActionListener{
     this.vista.Empezar.addActionListener(this);
     //this.vista.panel.addActionListener(this);
   }
+  /**
+   * Funcion encargada de colocar la memoria en la interfaz 
+   * @param memoSO memoria dedicada para el sistema operativo
+   * @param memoUS memoria dedicada para el usario, generada aleatoriamente
+   */
+  public void colocaCargasMemoria(String memoSO, String memoUS) {
+    vista.memoriaSO.setText(memoSO);
+    vista.memoriaUser.setText(memoUS);
+    System.out.println("Asignado memoria, SO="+memoSO+" US="+memoUS);
+  }  
   private void cargarArchivo() {
     JFileChooser fileChooser = new JFileChooser();
     fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos ASM", "asm"));
@@ -72,7 +83,7 @@ public class MainController implements ActionListener{
           case "configuracion":
               System.out.println("Entrando a configuración");
               vista.setVisible(false);
-              GestorConfig next_frame = new GestorConfig();
+              GestorConfig next_frame = new GestorConfig(this);
               next_frame.llamada();
               break;
               
